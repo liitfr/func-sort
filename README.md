@@ -1,3 +1,3 @@
-# func-sort
+# sort-my-items
 
-Sort an array (or anything else) by defining multiple criterias (and weights if needed) à la FP
+Sort an array's (or anything else) items by defining a hierarchical set of criterias, _à la FP_

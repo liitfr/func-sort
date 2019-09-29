@@ -1,28 +1,39 @@
 {
-  "name": "func-sort",
+  "name": "sort-my-items",
   "version": "1.0.0",
-  "description": "Sort an array (or anything else) by defining multiple criterias (and weights if needed) à la FP",
+  "description": "Sort an array's (or anything else) items by defining a hierarchical set of criterias, à la FP",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "test-ci": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/liitfr/func-sort.git"
+    "url": "git+ssh://git@github.com/liitfr/sort-my-items.git"
   },
   "keywords": [
-    "functional",
-    "programming",
-    "sort",
-    "order",
-    "array",
+    "functional-programming",
+    "hierarchical",
+    "sorting",
+    "ordering",
     "criteria",
-    "weight"
+    "array",
+    "items"
   ],
   "author": "liitfr",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/liitfr/func-sort/issues"
+    "url": "https://github.com/liitfr/sort-my-items/issues"
   },
-  "homepage": "https://github.com/liitfr/func-sort#readme"
+  "homepage": "https://github.com/liitfr/sort-my-items#readme",
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "@types/node": "12.7.8",
+    "coveralls": "3.0.6",
+    "jest": "24.9.0",
+    "ts-jest": "24.1.0",
+    "typescript": "3.6.3"
+  }
 }
