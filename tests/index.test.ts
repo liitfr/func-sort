@@ -89,9 +89,9 @@ const expectedResult = [
 const levelOrd = [2, 1, 0, null];
 const typeOrd = ['T', 'S'];
 
-const lIdx = (item: any) => levelOrd.indexOf(item.get('level'));
-const tIdx = (item: any) => typeOrd.indexOf(item.get('type'));
-const laIdx = (item: any) => item.get('label').charCodeAt(0) - 97;
+const lIdx = (item: any) => levelOrd.indexOf(item.level);
+const tIdx = (item: any) => typeOrd.indexOf(item.type);
+const laIdx = (item: any) => item.label.charCodeAt(0) - 97;
 
 const sortedList = sort(list, [lIdx, tIdx, laIdx]);
 
