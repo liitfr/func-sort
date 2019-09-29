@@ -1,0 +1,27 @@
+{
+  "name": "func-sort",
+  "version": "1.0.0",
+  "description": "Sort an array (or anything else) by defining criterias à la FP",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/liitfr/func-sort.git"
+  },
+  "keywords": [
+    "functional",
+    "programming",
+    "sort",
+    "order",
+    "criteria",
+    "weight"
+  ],
+  "author": "liitfr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liitfr/func-sort/issues"
+  },
+  "homepage": "https://github.com/liitfr/func-sort#readme"
+}
