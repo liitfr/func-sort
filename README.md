@@ -1,2 +1,3 @@
 # func-sort
- Sort your array (or anything else) by defining criterias (and weights if needed) à la FP
+
+Sort an array (or anything else) by defining multiple criterias (and weights if needed) à la FP
