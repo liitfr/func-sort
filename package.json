@@ -1,7 +1,7 @@
 {
   "name": "sort-my-items",
   "version": "1.0.0",
-  "description": "Sort an array's (or anything else) items by defining a hierarchical set of criterias, à la FP",
+  "description": "Sort an array's (or anything else's) items by defining a hierarchical set of criterias, à la FP",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

@@ -1,4 +1,4 @@
-import sort from '../src';
+import sort, { simpleComparator } from '../src';
 
 const list = [
   {
@@ -86,17 +86,15 @@ const expectedResult = [
   },
 ];
 
-const levelOrd = [2, 1, 0, null];
-const typeOrd = ['T', 'S'];
-
-const lIdx = (item: any) => levelOrd.indexOf(item.level);
-const tIdx = (item: any) => typeOrd.indexOf(item.type);
+const lIdx = (item: any) => [2, 1, 0, null].indexOf(item.level);
+const tIdx = (item: any) => ['T', 'S'].indexOf(item.type);
 const laIdx = (item: any) => item.label.charCodeAt(0) - 97;
 
-const sortedList = sort(list, [lIdx, tIdx, laIdx]);
+const sortedList = sort(
+  list,
+  [lIdx, tIdx, laIdx].map(criteria => simpleComparator(criteria)),
+);
 
 test('runs as expected', () => {
   expect(sortedList).toEqual(expectedResult);
 });
-
-console.log(sort(list, [lIdx, tIdx, laIdx]));

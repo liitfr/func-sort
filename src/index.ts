@@ -1,26 +1,27 @@
 type Item = any;
 type Score = number;
 type Index = number;
+type Weight = number;
 
 type Collection = any;
 type CollectionSort = (
   collection: Collection,
-  compareFn: CompareFn,
+  comparator: Comparator,
 ) => Collection;
 
+type WeightGenerator = (index: Index, comparators: Comparators) => Weight;
 type Criteria = (item: Item) => Score;
-type Criterias = Criteria[];
+type Comparator = (a: Item, b: Item) => Score;
+type Comparators = Comparator[];
+type ComparatorGenerator = (criteria: Criteria) => Comparator;
 
-type CompareFn = (a: Item, b: Item) => Score;
-type ConfrontFn = (criteria: Criteria) => CompareFn;
+const defaultWeightGenerator: WeightGenerator = (index, comparators) =>
+  Math.pow(10, comparators.length - index);
 
-const getWeight = (idx: Index, crits: Criteria[]) =>
-  Math.pow(10, crits.length - idx);
+const defaultSort: CollectionSort = (collection, comparator) =>
+  [...collection].sort(comparator);
 
-const defaultSortFn: CollectionSort = (collection, compare) =>
-  [...collection].sort(compare);
-
-const confront: ConfrontFn = criteria => (a, b) => {
+const simpleComparator: ComparatorGenerator = criteria => (a, b) => {
   const critA = criteria(a);
   const critB = criteria(b);
   if (critA < critB) {
@@ -33,21 +34,22 @@ const confront: ConfrontFn = criteria => (a, b) => {
 };
 
 const getSorter = (
-  criterias: Criterias,
-  sortFn: CollectionSort = defaultSortFn,
+  comparators: Comparators,
+  sort: CollectionSort = defaultSort,
+  weightGenerator: WeightGenerator = defaultWeightGenerator,
 ) => (collection: Collection) => {
-  const compare: CompareFn = (a, b) =>
-    criterias.reduce((score, crit, idx, crits) => {
-      return score + confront(crit)(a, b) * getWeight(idx, crits);
+  const globalComparator: Comparator = (a, b) =>
+    comparators.reduce((score, comp, index, comps) => {
+      return score + comp(a, b) * weightGenerator(index, comps);
     }, 0);
-  return sortFn(collection, compare);
+  return sort(collection, globalComparator);
 };
 
 const sort = (
   collection: Collection,
-  criterias: Criterias,
-  sortFn: CollectionSort = defaultSortFn,
-) => getSorter(criterias, sortFn)(collection);
+  comparators: Comparators,
+  sort: CollectionSort = defaultSort,
+) => getSorter(comparators, sort)(collection);
 
-export { getSorter };
+export { getSorter, simpleComparator };
 export default sort;
